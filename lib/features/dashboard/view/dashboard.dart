@@ -15,6 +15,7 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
+  var title = ["BH Verification"];
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -199,7 +200,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                   child: SizedBox(
                                       width: double.infinity,
                                       height: 376 / h * h,
-                                      child: Text("hi")))
+                                      child: Column(
+                                        children: [
+                                          drawerTxt(txt: "BH Verification"),
+                                          drawerTxt(txt: "BH Verification"),
+                                          drawerTxt(txt: "BH Verification"),
+                                          drawerTxt(txt: "BH Verification"),
+                                        ],
+                                      )))
                             ],
                           ),
                         ],
