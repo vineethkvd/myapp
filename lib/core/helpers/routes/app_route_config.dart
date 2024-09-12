@@ -1,4 +1,6 @@
 import 'package:go_router/go_router.dart';
+import 'package:myapp/features/dashboard/view/ahVerification.dart';
+import 'package:myapp/features/dashboard/view/bhVerfication.dart';
 import 'package:myapp/features/dashboard/view/dashboard.dart';
 import 'package:myapp/features/login/view/loginPage.dart';
 import 'app_route_name.dart';
@@ -20,6 +22,16 @@ class AppRoutes {
               name: RoutesName.dashboard,
               path: RoutesPath.dashBoardPage,
               builder: (context, state) => const DashboardPage(),
+            ),
+             GoRoute(
+              name: RoutesName.ahVerfication,
+              path: RoutesPath.ahVerification,
+              builder: (context, state) => const AhVerificationPage(),
+            ),
+            GoRoute(
+              name: RoutesName.bhVerfication,
+              path: RoutesPath.bhVerification,
+              builder: (context, state) => const BhVerificationPage(),
             ),
           ],
         );

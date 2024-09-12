@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/helpers/routes/app_route_config.dart';
-import 'package:myapp/features/login/view/loginPage.dart';
+import 'package:myapp/features/dashboard/controller/dashboardController.dart';
+import 'package:provider/provider.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -14,11 +15,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerDelegate: _appRouter.router.routerDelegate,
-      routeInformationParser: _appRouter.router.routeInformationParser,
-      routeInformationProvider: _appRouter.router.routeInformationProvider,
+    return MultiProvider(
+      providers: [
+          ChangeNotifierProvider(
+          create: (context) => Dashboardcontroller(),
+        ),
+      ],
+      builder: (context, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerDelegate: _appRouter.router.routerDelegate,
+          routeInformationParser: _appRouter.router.routeInformationParser,
+          routeInformationProvider: _appRouter.router.routeInformationProvider,
+        );
+      },
     );
   }
 }

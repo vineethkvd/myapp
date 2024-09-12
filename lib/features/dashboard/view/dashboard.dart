@@ -1,11 +1,10 @@
-import 'dart:ui';
 import 'package:marquee_text/marquee_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myapp/core/utils/configs/styles/colors.dart';
 import 'package:myapp/core/utils/shared/constant/assetsPathes.dart';
+import 'package:myapp/features/dashboard/controller/dashboardController.dart';
+import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -15,11 +14,29 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  var title = ["BH Verification"];
+  var title = [
+    "BH Verification",
+    "AH Verification",
+    "Varification Report",
+    "Manual Pawn Ticket",
+    "Printed PT without Proper photo",
+    "Updated Pawn Ticket Barcode",
+    "Exit"
+  ];
+  var icons = [
+    AssetsPathes.download,
+    AssetsPathes.download,
+    AssetsPathes.download,
+    AssetsPathes.download,
+    AssetsPathes.download,
+    AssetsPathes.download,
+    AssetsPathes.download,
+  ];
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final dashboardcontroller = Provider.of<Dashboardcontroller>(context);
     return Scaffold(
         body: Container(
       height: h,
@@ -46,7 +63,7 @@ class _DashboardPageState extends State<DashboardPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Spacer(
+                const Spacer(
                   flex: 1,
                 ),
                 Container(
@@ -61,7 +78,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       SizedBox(
                         width: w * 0.25,
                       ),
-                      Expanded(
+                      const Expanded(
                           child: SizedBox(
                         child: Center(
                           child: MarqueeText(
@@ -104,7 +121,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   width: 146 / w * w,
                   child: Row(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       Image.asset(
                         AssetsPathes.mLogo,
                         fit: BoxFit.fill,
@@ -114,7 +131,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     ],
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: SizedBox(
                     child: Center(
                       child: Text("MANAPPURAM FINANCE LIMITED - A  O VALAPAD",
@@ -178,36 +195,63 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       width: 275 / w * w,
                       height: 376 / h * h,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      child: Stack(
                         children: [
-                          Row(
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.btnColor,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            width: 40 / w * w,
+                            height: 376 / h * h,
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 40 / w * w,
-                                height: 376 / h * h,
-                                decoration: BoxDecoration(
-                                  color: AppColor.btnColor,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Row(
-                                  children: [],
-                                ),
-                              ),
                               Expanded(
-                                  child: SizedBox(
-                                      width: double.infinity,
-                                      height: 376 / h * h,
-                                      child: Column(
-                                        children: [
-                                          drawerTxt(txt: "BH Verification"),
-                                          drawerTxt(txt: "BH Verification"),
-                                          drawerTxt(txt: "BH Verification"),
-                                          drawerTxt(txt: "BH Verification"),
-                                        ],
-                                      )))
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: ListView.separated(
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {  
+                                            dashboardcontroller
+                                                .changeCurrentWidget(index);
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              drawerIcon(
+                                                  assetName: icons[index]),
+                                              Expanded(
+                                                  child: Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: drawerTxt(
+                                                            txt: title[index]),
+                                                      ))),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return SizedBox(
+                                          height: 30 / h * h,
+                                        );
+                                      },
+                                      itemCount: title.length),
+                                ),
+                              )
                             ],
                           ),
                         ],
@@ -224,6 +268,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: AppColor.conColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
+                        child: dashboardcontroller.currentWidget,
                       ),
                     )
                   ],
@@ -313,8 +358,19 @@ class _DashboardPageState extends State<DashboardPage> {
       txt,
       style: const TextStyle(
         fontSize: 14,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w500,
         color: AppColor.txtColor,
+      ),
+    );
+  }
+
+  Widget drawerIcon({required String assetName}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: SvgPicture.asset(
+        assetName,
+        width: 20,
+        height: 14,
       ),
     );
   }
