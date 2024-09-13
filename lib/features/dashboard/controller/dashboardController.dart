@@ -10,8 +10,7 @@ class Dashboardcontroller extends ChangeNotifier {
     if (index == selectedIndex) return; 
     selectedIndex = index;
 
-    // Update currentWidget based on the selected index
-    switch (selectedIndex) {
+       switch (selectedIndex) {
       case 0:
         currentWidget = const AhVerificationPage();
         break;

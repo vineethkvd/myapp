@@ -10,9 +10,10 @@ class AhVerificationPage extends StatefulWidget {
 class _AhVerificationPageState extends State<AhVerificationPage> {
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      "AH Ver",
-      style: TextStyle(fontSize: 20, color: Colors.black),
+    return Column(
+      children: [
+       
+      ],
     );
   }
 }
