@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myapp/core/helpers/routes/app_route_path.dart';
 import 'package:myapp/core/utils/configs/styles/colors.dart';
+import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
 import 'package:myapp/core/utils/shared/constant/assetsPathes.dart';
 import 'package:myapp/features/dashboard/controller/dashboardController.dart';
 import 'package:myapp/features/login/controller/LoginController.dart';
@@ -149,7 +150,23 @@ class _LoginPageState extends State<LoginPage> {
                               height: 35 / h * h,
                               text: "Login",
                               onPressed: () {
-                                context.go(RoutesPath.dashBoardPage);
+                                if (_loginController.email.text.isEmpty) {
+                                  CustomToast.showCustomToast(
+                                      message: "Email should not be empty");
+                                } else if (_loginController
+                                    .password.text.isEmpty) {
+                                  CustomToast.showCustomToast(
+                                      message: "Password should not be empty");
+                                } else {
+                                  _loginController.userLoginApi().then(
+                                    (value) {
+                                      if (_loginController.loginModel.token !=
+                                          null) {
+                                        context.go(RoutesPath.dashBoardPage);
+                                      }
+                                    },
+                                  );
+                                }
                               }),
                           SizedBox(
                             height: 20 / h * h,
