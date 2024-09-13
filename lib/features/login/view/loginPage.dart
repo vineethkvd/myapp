@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: _customTextField(
                               labelTxt: "User Name",
                               hintTxt: "Enter user name",
-                              controller: null,
+                              controller: _loginController.email,
                               keyboardType: TextInputType.name,
                               labelTxtStyle: const TextStyle(
                                 fontSize: 12,
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: _customTextField(
                               labelTxt: "Password",
                               hintTxt: "Enter password",
-                              controller: null,
+                              controller: _loginController.password,
                               keyboardType: TextInputType.name,
                               labelTxtStyle: const TextStyle(
                                 fontSize: 12,
