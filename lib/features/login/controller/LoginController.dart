@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
 import 'package:myapp/features/login/model/LoginModel.dart';
 import 'package:myapp/features/login/repository/LoginRepository.dart';
 
@@ -13,20 +14,6 @@ class LoginController extends ChangeNotifier {
   void toggle() {
     passwordVisible = !passwordVisible;
     notifyListeners();
-  }
-
-  Future<bool?> showToastMsg(String message) {
-    return Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER_LEFT,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.black87,
-      textColor: Colors.white,
-      fontSize: 16.0,
-      webBgColor: "linear-gradient(to right, #000000, #434343)",
-      webPosition: "center",
-    );
   }
 
   final _api = LoginRepository();
@@ -43,12 +30,16 @@ class LoginController extends ChangeNotifier {
 
       if (response != null && response['status'] == 200) {
         loginModel = LoginModel.fromJson(response['data']);
-        showToastMsg("Login successful");
+        CustomToast.showCustomToast(message: "Login successful");
+        notifyListeners();
       } else if (response != null && response['status'] == 400) {
         loginModel = LoginModel.fromJson(response['data']);
-        showToastMsg("Login failed: ${loginModel.message ?? ''}");
+        CustomToast.showCustomToast(
+            message: "Login failed: ${loginModel.message ?? ''}");
+        notifyListeners();
       } else {
-        showToastMsg("Unexpected error occurred");
+        CustomToast.showCustomToast(message: "Unexpected error occurred");
+        notifyListeners();
       }
     } catch (e) {
       if (kDebugMode) {
