@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/helpers/routes/app_route_config.dart';
 import 'package:myapp/features/dashboard/controller/dashboardController.dart';
+import 'package:myapp/features/login/controller/LoginController.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatefulWidget {
@@ -17,8 +18,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-          ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => Dashboardcontroller(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginController(),
         ),
       ],
       builder: (context, child) {

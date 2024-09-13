@@ -4,6 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:myapp/core/helpers/routes/app_route_path.dart';
 import 'package:myapp/core/utils/configs/styles/colors.dart';
 import 'package:myapp/core/utils/shared/constant/assetsPathes.dart';
+import 'package:myapp/features/dashboard/controller/dashboardController.dart';
+import 'package:myapp/features/login/controller/LoginController.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final _loginController = Provider.of<LoginController>(context);
     return Scaffold(
       body: Container(
           height: h,
@@ -125,6 +129,15 @@ class _LoginPageState extends State<LoginPage> {
                               hintTxtStyle: const TextStyle(
                                 fontSize: 12,
                                 color: AppColor.txtColor,
+                              ),
+                              obscureText: _loginController.passwordVisible,
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _loginController.passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: _loginController.toggle,
                               ),
                             ),
                           ),
