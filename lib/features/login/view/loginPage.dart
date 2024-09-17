@@ -151,11 +151,11 @@ class _LoginPageState extends State<LoginPage> {
                               text: "Login",
                               onPressed: () {
                                 if (_loginController.email.text.isEmpty) {
-                                  CustomToast.showCustomToast(
+                                  CustomToast.showCustomErrorToast(
                                       message: "Email should not be empty");
                                 } else if (_loginController
                                     .password.text.isEmpty) {
-                                  CustomToast.showCustomToast(
+                                  CustomToast.showCustomErrorToast(
                                       message: "Password should not be empty");
                                 } else {
                                   _loginController.userLoginApi().then(
