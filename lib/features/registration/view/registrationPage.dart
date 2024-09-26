@@ -16,7 +16,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final _registrationController =
+    final registrationController =
         Provider.of<RegistrationController>(context);
     return Scaffold(
         body: Container(
@@ -69,11 +69,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       borderRadius: BorderRadius.circular(10)),
                   child: DropdownButtonFormField<String>(
                     dropdownColor: Colors.white,
-                    value: _registrationController.selectedStateId.isNotEmpty
-                        ? _registrationController.selectedStateId
+                    value: registrationController.selectedStateId.isNotEmpty
+                        ? registrationController.selectedStateId
                         : null,
                     menuMaxHeight: 200,
-                    items: _registrationController.stateList.map((element) {
+                    items: registrationController.stateList.map((element) {
                       return DropdownMenuItem<String>(
                         value: element.id.toString(),
                         child: Text(element.state ?? ''),
@@ -113,7 +113,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     onChanged: (value) {
-                      _registrationController.selectedStateId =
+                      registrationController.selectedStateId =
                           value.toString();
                       // selectDistrict(
                       //     stateId: _loginController.selectedStateId.value);

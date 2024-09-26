@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';

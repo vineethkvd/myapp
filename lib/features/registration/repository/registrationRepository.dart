@@ -5,13 +5,12 @@ class RegistrationRepository {
   final _apiService = NetworkApiServices();
 
   Future<dynamic> stateApi() async {
-    dynamic response =  await _apiService.getApi(ApiEndPoints.state);
+    dynamic response = await _apiService.getApi(ApiEndPoints.state);
     return response;
   }
 
-  Future<dynamic> districtApi(var data) async {
-    dynamic response = await _apiService.postApi(
-        data, ApiEndPoints.baseURL + ApiEndPoints.login);
+  Future<dynamic> districtApi() async {
+    dynamic response = await _apiService.getApi(ApiEndPoints.district);
     return response;
   }
 }
