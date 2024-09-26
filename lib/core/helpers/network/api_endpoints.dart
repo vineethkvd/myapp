@@ -5,4 +5,5 @@ class ApiEndPoints {
   static const String testBaseURL = 'https://themithraa.com/RestApi/userApi/';
   static const String apiToken = "Mithra@2024";
   static const String district = "district.php";
+    static const String test = "district.php";
 }
