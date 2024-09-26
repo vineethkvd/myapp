@@ -44,9 +44,8 @@ class RegistrationController extends ChangeNotifier {
     }
   }
 
-  void setSelectedState(String? id, String? name) {
-    selectedStateId = id ?? '';
-    selectedStateName = name ?? '';
-    notifyListeners();
-  }
+  // void selectDistrict({required String stateId}) {
+  //   _registrationController.districtApi(stateId: stateId);
+  //   _registrationController.selectedDistrictId.value = '';
+  // }
 }
