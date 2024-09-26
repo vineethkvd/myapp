@@ -3,6 +3,7 @@ import 'package:myapp/features/dashboard/view/ahVerification.dart';
 import 'package:myapp/features/dashboard/view/bhVerfication.dart';
 import 'package:myapp/features/dashboard/view/dashboard.dart';
 import 'package:myapp/features/login/view/loginPage.dart';
+import 'package:myapp/features/registration/view/registrationPage.dart';
 import 'app_route_name.dart';
 import 'app_route_path.dart';
 
@@ -32,6 +33,11 @@ class AppRoutes {
               name: RoutesName.bhVerfication,
               path: RoutesPath.bhVerification,
               builder: (context, state) => const BhVerificationPage(),
+            ),
+             GoRoute(
+              name: RoutesName.registration,
+              path: RoutesPath.register,
+              builder: (context, state) => const RegistrationPage(),
             ),
           ],
         );

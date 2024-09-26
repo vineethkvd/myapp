@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
 import 'package:myapp/features/login/model/LoginModel.dart';
 import 'package:myapp/features/login/repository/LoginRepository.dart';

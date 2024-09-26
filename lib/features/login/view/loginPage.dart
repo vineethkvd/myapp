@@ -5,7 +5,6 @@ import 'package:myapp/core/helpers/routes/app_route_path.dart';
 import 'package:myapp/core/utils/configs/styles/colors.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
 import 'package:myapp/core/utils/shared/constant/assetsPathes.dart';
-import 'package:myapp/features/dashboard/controller/dashboardController.dart';
 import 'package:myapp/features/login/controller/LoginController.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final _loginController = Provider.of<LoginController>(context);
+    final loginController = Provider.of<LoginController>(context);
     return Scaffold(
       body: Container(
           height: h,
@@ -93,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: _customTextField(
                               labelTxt: "User Name",
                               hintTxt: "Enter user name",
-                              controller: _loginController.email,
+                              controller: loginController.email,
                               keyboardType: TextInputType.name,
                               labelTxtStyle: const TextStyle(
                                 fontSize: 12,
@@ -121,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                             child: _customTextField(
                               labelTxt: "Password",
                               hintTxt: "Enter password",
-                              controller: _loginController.password,
+                              controller: loginController.password,
                               keyboardType: TextInputType.name,
                               labelTxtStyle: const TextStyle(
                                 fontSize: 12,
@@ -131,14 +130,14 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 12,
                                 color: AppColor.txtColor,
                               ),
-                              obscureText: _loginController.passwordVisible,
+                              obscureText: loginController.passwordVisible,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _loginController.passwordVisible
+                                  loginController.passwordVisible
                                       ? Icons.visibility
                                       : Icons.visibility_off,
                                 ),
-                                onPressed: _loginController.toggle,
+                                onPressed: loginController.toggle,
                               ),
                             ),
                           ),
@@ -150,17 +149,17 @@ class _LoginPageState extends State<LoginPage> {
                               height: 35 / h * h,
                               text: "Login",
                               onPressed: () {
-                                if (_loginController.email.text.isEmpty) {
+                                if (loginController.email.text.isEmpty) {
                                   CustomToast.showCustomErrorToast(
                                       message: "Email should not be empty");
-                                } else if (_loginController
+                                } else if (loginController
                                     .password.text.isEmpty) {
                                   CustomToast.showCustomErrorToast(
                                       message: "Password should not be empty");
                                 } else {
-                                  _loginController.userLoginApi().then(
+                                  loginController.userLoginApi().then(
                                     (value) {
-                                      if (_loginController.loginModel.token !=
+                                      if (loginController.loginModel.token !=
                                           null) {
                                         context.go(RoutesPath.dashBoardPage);
                                       }
@@ -181,15 +180,17 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Row(
                             children: [
-                              Spacer(),
+                              const Spacer(),
                               Material(
                                 borderRadius: BorderRadius.circular(30),
-                                elevation: 2,
+                                elevation: 0,
                                 child: InkWell(
                                   borderRadius: BorderRadius.circular(30),
-                                  onTap: () {},
+                                  onTap: () {
+                                    context.go(RoutesPath.register);
+                                  },
                                   splashColor: Colors.black.withOpacity(0.3),
-                                  child: Text("Dont have account?",
+                                  child: const Text("Dont have account?",
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
