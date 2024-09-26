@@ -179,15 +179,24 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 10 / h * h,
                           ),
-                          const Row(
+                          Row(
                             children: [
                               Spacer(),
-                              Text("Set Weighing Balance?",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColor.skyBlue,
-                                  )),
+                              Material(
+                                borderRadius: BorderRadius.circular(30),
+                                elevation: 2,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(30),
+                                  onTap: () {},
+                                  splashColor: Colors.black.withOpacity(0.3),
+                                  child: Text("Dont have account?",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColor.skyBlue,
+                                      )),
+                                ),
+                              )
                             ],
                           ),
                         ],
