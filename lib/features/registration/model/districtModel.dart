@@ -10,9 +10,9 @@ class DistrictModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ID'] = this.iD;
-    data['DISTRICT_NAME'] = this.dISTRICTNAME;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ID'] = iD;
+    data['DISTRICT_NAME'] = dISTRICTNAME;
     return data;
   }
 }

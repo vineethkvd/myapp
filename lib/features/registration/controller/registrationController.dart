@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';
 import 'package:myapp/features/registration/repository/registrationRepository.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
@@ -20,9 +19,10 @@ class RegistrationController extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       final response = await _api.stateApi();
-
+      CustomToast.showCustomErrorToast(message: "data :${response['status']}");
       if (response != null && response['status'] == 200) {
-        final List<dynamic> responseData = json.decode(response['data']);
+        final List<dynamic> responseData = response['data'];
+        CustomToast.showCustomToast(message: "ok ${response['data']}");
         stateList =
             responseData.map((json) => StateModel.fromJson(json)).toList();
         notifyListeners();
@@ -34,7 +34,7 @@ class RegistrationController extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      CustomToast.showCustomErrorToast(message: "error $e");
+      CustomToast.showCustomErrorToast(message: "message :$e ");
       if (kDebugMode) {
         print("Error $e");
       }

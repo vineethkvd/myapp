@@ -12,18 +12,12 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-    @override
-    void initState() {
-    super.initState();
-    // Fetch patient list when HomePage initializes
-    Provider.of<RegistrationController>(context, listen: false).stateApi();
-  }
+
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final _registrationController =
-        Provider.of<RegistrationController>(context);
+    final _registrationController = Provider.of<RegistrationController>(context);
     return Scaffold(
         body: Container(
       height: h,
@@ -55,9 +49,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
           SizedBox(
             height: 20 / h * h,
           ),
-          Consumer<RegistrationController>(
-            builder: (context, registrationController, child) {
-              return Container(
+          ElevatedButton(
+              onPressed: () {
+                _registrationController.stateApi();
+              },
+              child: Text("k")),
+          Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
@@ -77,11 +74,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           borderRadius: BorderRadius.circular(10)),
                       child: DropdownButtonFormField<String>(
                         dropdownColor: Colors.white,
-                        value: registrationController.selectedStateId.isNotEmpty
-                            ? registrationController.selectedStateId
+                        value: _registrationController.selectedStateId.isNotEmpty
+                            ? _registrationController.selectedStateId
                             : null,
                         menuMaxHeight: 200,
-                        items: registrationController.stateList.map((element) {
+                        items: _registrationController.stateList.map((element) {
                           return DropdownMenuItem<String>(
                             value: element.id.toString(),
                             child: Text(element.state ?? ''),
@@ -96,7 +93,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             fontFamily: "poppinsRegular",
                             color: Colors.black,
                           ),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               vertical: 16.5, horizontal: 15),
                           labelText: "Select state",
                           labelStyle: const TextStyle(
@@ -123,7 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                         onChanged: (value) {
-                          registrationController.selectedStateId =
+                          _registrationController.selectedStateId =
                               value.toString();
                           // selectDistrict(
                           //     stateId: _loginController.selectedStateId.value);
@@ -132,9 +129,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ],
                 ),
-              );
-            },
-          ),
+              )
         ],
       ),
     ));

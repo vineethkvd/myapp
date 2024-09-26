@@ -10,9 +10,9 @@ class StateModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['STATE'] = this.state;
-    data['ID'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['STATE'] = state;
+    data['ID'] = id;
     return data;
   }
 }
