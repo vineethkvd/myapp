@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/utils/configs/styles/colors.dart';
 import 'package:myapp/core/utils/shared/constant/assetsPathes.dart';
+import 'package:myapp/features/registration/controller/registrationController.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -10,10 +12,18 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+    @override
+    void initState() {
+    super.initState();
+    // Fetch patient list when HomePage initializes
+    Provider.of<RegistrationController>(context, listen: false).stateApi();
+  }
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
+    final _registrationController =
+        Provider.of<RegistrationController>(context);
     return Scaffold(
         body: Container(
       height: h,
@@ -45,21 +55,86 @@ class _RegistrationPageState extends State<RegistrationPage> {
           SizedBox(
             height: 20 / h * h,
           ),
-          Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: const DecorationImage(
-                  image: AssetImage(AssetsPathes.loginBackground),
-                  fit: BoxFit.fill,
+          Consumer<RegistrationController>(
+            builder: (context, registrationController, child) {
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: const DecorationImage(
+                    image: AssetImage(AssetsPathes.loginBackground),
+                    fit: BoxFit.fill,
+                  ),
                 ),
-              ),
-              height: 413 / h * h,
-              width: 362 / w * w,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 33 / w * w, vertical: 21 / h * h),
-              child: const Column(
-                children: [],
-              ))
+                height: 413 / h * h,
+                width: 362 / w * w,
+                padding: EdgeInsets.symmetric(
+                    horizontal: 33 / w * w, vertical: 21 / h * h),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: const Color(0xfff5f5f5),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: DropdownButtonFormField<String>(
+                        dropdownColor: Colors.white,
+                        value: registrationController.selectedStateId.isNotEmpty
+                            ? registrationController.selectedStateId
+                            : null,
+                        menuMaxHeight: 200,
+                        items: registrationController.stateList.map((element) {
+                          return DropdownMenuItem<String>(
+                            value: element.id.toString(),
+                            child: Text(element.state ?? ''),
+                          );
+                        }).toList(),
+                        decoration: InputDecoration(
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          filled: true,
+                          fillColor: const Color(0xfff5f5f5),
+                          hintStyle: const TextStyle(
+                            fontSize: 12,
+                            fontFamily: "poppinsRegular",
+                            color: Colors.black,
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 16.5, horizontal: 15),
+                          labelText: "Select state",
+                          labelStyle: const TextStyle(
+                            fontSize: 16,
+                            fontFamily: "poppinsRegular",
+                            color: Colors.black,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Color(0xffd9d9d9)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide:
+                                const BorderSide(color: Color(0xffd9d9d9)),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(color: Colors.red),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          registrationController.selectedStateId =
+                              value.toString();
+                          // selectDistrict(
+                          //     stateId: _loginController.selectedStateId.value);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ],
       ),
     ));

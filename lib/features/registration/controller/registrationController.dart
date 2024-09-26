@@ -13,6 +13,8 @@ class RegistrationController extends ChangeNotifier {
   //state api
   var stateModel = StateModel();
   var stateList = <StateModel>[];
+  var selectedStateId = '';
+  var selectedStateName = '';
   Future<void> stateApi() async {
     try {
       isLoading = true;
@@ -23,6 +25,7 @@ class RegistrationController extends ChangeNotifier {
         final List<dynamic> responseData = json.decode(response['data']);
         stateList =
             responseData.map((json) => StateModel.fromJson(json)).toList();
+        notifyListeners();
       } else if (response != null && response['status'] == 400) {
         stateModel = StateModel.fromJson(response['data']);
         notifyListeners();
@@ -31,6 +34,7 @@ class RegistrationController extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
+      CustomToast.showCustomErrorToast(message: "error $e");
       if (kDebugMode) {
         print("Error $e");
       }
@@ -38,5 +42,11 @@ class RegistrationController extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+
+  void setSelectedState(String? id, String? name) {
+    selectedStateId = id ?? '';
+    selectedStateName = name ?? '';
+    notifyListeners();
   }
 }

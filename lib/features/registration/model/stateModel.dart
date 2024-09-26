@@ -1,18 +1,18 @@
 class StateModel {
-  String? sTATE;
-  int? iD;
+  String? state;
+  int? id;
 
-  StateModel({this.sTATE, this.iD});
+  StateModel({this.state, this.id});
 
   StateModel.fromJson(Map<String, dynamic> json) {
-    sTATE = json['STATE'];
-    iD = json['ID'];
+    state = json['STATE'];
+    id = json['ID'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['STATE'] = this.sTATE;
-    data['ID'] = this.iD;
+    data['STATE'] = this.state;
+    data['ID'] = this.id;
     return data;
   }
 }
