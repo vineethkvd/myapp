@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/core/helpers/routes/app_route_config.dart';
 import 'package:myapp/features/dashboard/controller/dashboardController.dart';
 import 'package:myapp/features/login/controller/LoginController.dart';
+import 'package:myapp/features/registration/controller/registrationController.dart';
 import 'package:provider/provider.dart';
 
 class MyApp extends StatefulWidget {
@@ -24,6 +25,8 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (context) => LoginController(),
         ),
+        ChangeNotifierProvider(
+            create: (context) => RegistrationController()..stateApi()),
       ],
       builder: (context, child) {
         return MaterialApp.router(

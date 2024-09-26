@@ -1,15 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';
 import 'package:myapp/features/registration/repository/registrationRepository.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
 
-class Registrationcontroller extends ChangeNotifier {
+class RegistrationController extends ChangeNotifier {
   final _api = RegistrationRepository();
   bool isLoading = false;
 
   //state api
   var stateModel = StateModel();
+  var stateList = <StateModel>[];
   Future<void> stateApi() async {
     try {
       isLoading = true;
@@ -17,8 +20,9 @@ class Registrationcontroller extends ChangeNotifier {
       final response = await _api.stateApi();
 
       if (response != null && response['status'] == 200) {
-        stateModel = StateModel.fromJson(response['data']);
-        notifyListeners();
+        final List<dynamic> responseData = json.decode(response['data']);
+        stateList =
+            responseData.map((json) => StateModel.fromJson(json)).toList();
       } else if (response != null && response['status'] == 400) {
         stateModel = StateModel.fromJson(response['data']);
         notifyListeners();
