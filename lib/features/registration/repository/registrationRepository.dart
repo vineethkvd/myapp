@@ -9,8 +9,9 @@ class RegistrationRepository {
     return response;
   }
 
-  Future<dynamic> districtApi() async {
-    dynamic response = await _apiService.getApi(ApiEndPoints.district);
+  Future<dynamic> districtApi({required String stateId}) async {
+    dynamic response =
+        await _apiService.getApi(ApiEndPoints.district + stateId);
     return response;
   }
 }

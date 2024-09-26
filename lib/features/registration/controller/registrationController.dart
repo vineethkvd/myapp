@@ -1,5 +1,5 @@
-
 import 'package:flutter/foundation.dart';
+import 'package:myapp/features/registration/model/districtModel.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';
 import 'package:myapp/features/registration/repository/registrationRepository.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
@@ -21,7 +21,6 @@ class RegistrationController extends ChangeNotifier {
       CustomToast.showCustomErrorToast(message: "data :${response['status']}");
       if (response != null && response['status'] == 200) {
         final List<dynamic> responseData = response['data'];
-        CustomToast.showCustomToast(message: "ok ${response['data']}");
         stateList =
             responseData.map((json) => StateModel.fromJson(json)).toList();
         notifyListeners();
@@ -33,7 +32,6 @@ class RegistrationController extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      CustomToast.showCustomErrorToast(message: "message :$e ");
       if (kDebugMode) {
         print("Error $e");
       }
@@ -43,8 +41,42 @@ class RegistrationController extends ChangeNotifier {
     }
   }
 
-  // void selectDistrict({required String stateId}) {
-  //   _registrationController.districtApi(stateId: stateId);
-  //   _registrationController.selectedDistrictId.value = '';
-  // }
+  //district api
+  var districtModel = DistrictModel();
+  var districtList = <DistrictModel>[];
+  var selectedDistrictId = '';
+  var selectedDistrictName = '';
+  Future<void> districtApi({required String stateId}) async {
+    try {
+      isLoading = true;
+      notifyListeners();
+      final response = await _api.districtApi(stateId: stateId);
+      CustomToast.showCustomErrorToast(message: "data :${response['status']}");
+      if (response != null && response['status'] == 200) {
+        final List<dynamic> responseData = response['data'];
+        districtList =
+            responseData.map((json) => DistrictModel.fromJson(json)).toList();
+        notifyListeners();
+      } else if (response != null && response['status'] == 400) {
+        districtModel = DistrictModel.fromJson(response['data']);
+        notifyListeners();
+      } else {
+        CustomToast.showCustomToast(message: "Unexpected error occurred");
+        notifyListeners();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print("Error $e");
+      }
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  void selectDistrict({required String stateId}) {
+    districtApi(stateId: stateId);
+    selectedDistrictId = '';
+    notifyListeners();
+  }
 }
