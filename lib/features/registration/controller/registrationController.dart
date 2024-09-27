@@ -18,7 +18,6 @@ class RegistrationController extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       final response = await _api.stateApi();
-      CustomToast.showCustomErrorToast(message: "data :${response['status']}");
       if (response != null && response['status'] == 200) {
         final List<dynamic> responseData = response['data'];
         stateList =
@@ -51,7 +50,6 @@ class RegistrationController extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       final response = await _api.districtApi(stateId: stateId);
-      CustomToast.showCustomErrorToast(message: "data :${response['status']}");
       if (response != null && response['status'] == 200) {
         final List<dynamic> responseData = response['data'];
         districtList =
@@ -75,9 +73,11 @@ class RegistrationController extends ChangeNotifier {
   }
 
   void selectDistrict({required String stateId}) {
-    districtApi(stateId: stateId).then((value) {
-      selectedDistrictId = '';
-    },);
+    districtApi(stateId: stateId).then(
+      (value) {
+        selectedDistrictId = '';
+      },
+    );
     notifyListeners();
   }
 }

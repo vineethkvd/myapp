@@ -43,6 +43,7 @@ dependencies:
   fl_chart: ^0.69.0
   fluttertoast: ^8.2.8
   shared_preferences: ^2.3.2
+  menu_bar: ^0.5.3
 
 
 dev_dependencies:

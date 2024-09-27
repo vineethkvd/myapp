@@ -16,8 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-
   @override
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
@@ -33,8 +31,10 @@ class _LoginPageState extends State<LoginPage> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Stack(
-            alignment: Alignment.center,
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
