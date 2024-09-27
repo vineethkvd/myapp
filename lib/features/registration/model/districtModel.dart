@@ -1,18 +1,18 @@
 class DistrictModel {
-  int? iD;
-  String? dISTRICTNAME;
+  int? id;
+  String? districtName;
 
-  DistrictModel({this.iD, this.dISTRICTNAME});
+  DistrictModel({this.id, this.districtName});
 
   DistrictModel.fromJson(Map<String, dynamic> json) {
-    iD = json['ID'];
-    dISTRICTNAME = json['DISTRICT_NAME'];
+    id = json['ID'];
+    districtName = json['DISTRICT_NAME'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['ID'] = iD;
-    data['DISTRICT_NAME'] = dISTRICTNAME;
+    data['ID'] = id;
+    data['DISTRICT_NAME'] = districtName;
     return data;
   }
 }

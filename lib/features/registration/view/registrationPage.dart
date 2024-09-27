@@ -16,8 +16,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final registrationController =
-        Provider.of<RegistrationController>(context);
+    final registrationController = Provider.of<RegistrationController>(context);
     return Scaffold(
         body: Container(
       height: h,
@@ -62,6 +61,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
             padding: EdgeInsets.symmetric(
                 horizontal: 33 / w * w, vertical: 21 / h * h),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -113,7 +114,64 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     onChanged: (value) {
-                      registrationController.selectedStateId =
+                      registrationController.selectedStateId = value.toString();
+                      registrationController.selectDistrict(
+                          stateId: registrationController.selectedStateId
+                              .toString());
+                    },
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: const Color(0xfff5f5f5),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: DropdownButtonFormField<String>(
+                    dropdownColor: Colors.white,
+                    value: registrationController.selectedDistrictId.isNotEmpty
+                        ? registrationController.selectedDistrictId
+                        : null,
+                    menuMaxHeight: 200,
+                    items: registrationController.districtList.map((element) {
+                      return DropdownMenuItem<String>(
+                        value: element.id.toString(),
+                        child: Text(element.districtName ?? ''),
+                      );
+                    }).toList(),
+                    decoration: InputDecoration(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      filled: true,
+                      fillColor: const Color(0xfff5f5f5),
+                      hintStyle: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: "poppinsRegular",
+                        color: Colors.black,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 16.5, horizontal: 15),
+                      labelText: "Select district",
+                      labelStyle: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: "poppinsRegular",
+                        color: Colors.black,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Color(0xffd9d9d9)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Color(0xffd9d9d9)),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: const BorderSide(color: Colors.red),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      registrationController.selectedDistrictId =
                           value.toString();
                       // selectDistrict(
                       //     stateId: _loginController.selectedStateId.value);
@@ -122,7 +180,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     ));

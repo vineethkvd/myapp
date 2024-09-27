@@ -75,8 +75,9 @@ class RegistrationController extends ChangeNotifier {
   }
 
   void selectDistrict({required String stateId}) {
-    districtApi(stateId: stateId);
-    selectedDistrictId = '';
+    districtApi(stateId: stateId).then((value) {
+      selectedDistrictId = '';
+    },);
     notifyListeners();
   }
 }
