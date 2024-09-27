@@ -74,6 +74,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ? registrationController.selectedStateId
                         : null,
                     menuMaxHeight: 200,
+                    isExpanded: true,
                     items: registrationController.stateList.map((element) {
                       return DropdownMenuItem<String>(
                         value: element.id.toString(),
@@ -121,6 +122,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     },
                   ),
                 ),
+                SizedBox(
+                  height: 10 / h * h,
+                ),
                 Container(
                   decoration: BoxDecoration(
                       color: const Color(0xfff5f5f5),
@@ -131,6 +135,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ? registrationController.selectedDistrictId
                         : null,
                     menuMaxHeight: 200,
+                    isExpanded: true,
                     items: registrationController.districtList.map((element) {
                       return DropdownMenuItem<String>(
                         value: element.id.toString(),
