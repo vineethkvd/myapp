@@ -159,14 +159,8 @@ class _LoginPageState extends State<LoginPage> {
                                   CustomToast.showCustomErrorToast(
                                       message: "Password should not be empty");
                                 } else {
-                                  loginController.userLoginApi().then(
-                                    (value) {
-                                      if (loginController.loginModel.token !=
-                                          null) {
-                                        context.go(RoutesPath.dashBoardPage);
-                                      }
-                                    },
-                                  );
+                                  loginController.userLoginApi(
+                                      context: context);
                                 }
                               }),
                           SizedBox(

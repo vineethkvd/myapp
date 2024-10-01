@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:myapp/features/dashboard/view/ahVerification.dart';
 import 'package:myapp/features/dashboard/view/bhVerfication.dart';
 import 'package:myapp/features/dashboard/view/dashboard.dart';
+import 'package:myapp/features/dashboard/view/resDashboard.dart';
 import 'package:myapp/features/login/view/loginPage.dart';
 import 'package:myapp/features/registration/view/registrationPage.dart';
 import 'app_route_name.dart';
@@ -24,7 +25,7 @@ class AppRoutes {
               path: RoutesPath.dashBoardPage,
               builder: (context, state) => const DashboardPage(),
             ),
-             GoRoute(
+            GoRoute(
               name: RoutesName.ahVerfication,
               path: RoutesPath.ahVerification,
               builder: (context, state) => const AhVerificationPage(),
@@ -34,10 +35,15 @@ class AppRoutes {
               path: RoutesPath.bhVerification,
               builder: (context, state) => const BhVerificationPage(),
             ),
-             GoRoute(
+            GoRoute(
               name: RoutesName.registration,
               path: RoutesPath.register,
               builder: (context, state) => const RegistrationPage(),
+            ),
+            GoRoute(
+              name: RoutesName.resDashboard,
+              path: RoutesPath.resDashboard,
+              builder: (context, state) => const ResDashboard(),
             ),
           ],
         );

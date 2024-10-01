@@ -4,4 +4,5 @@ class RoutesPath {
   static const register = '/register';
   static const ahVerification = '/ahVerification';
   static const bhVerification = '/bhVerification';
+  static const resDashboard = '/resDashboard';
 }
