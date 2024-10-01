@@ -226,7 +226,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               onPressed: () {
                                 registrationController.uploadImage();
                               },
-                              child: Text("hi")),
+                              child: const Text("hi")),
                           const Center(
                             child: Text(
                               "Registration",

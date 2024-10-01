@@ -35,4 +35,10 @@ class Dashboardcontroller extends ChangeNotifier {
       _scaffoldKey.currentState!.openDrawer();
     }
   }
+
+  var drawerTap = true;
+  void toggleDrawer() {
+    drawerTap = !drawerTap;
+    notifyListeners();
+  }
 }

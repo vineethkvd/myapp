@@ -3,7 +3,6 @@ import 'package:myapp/features/registration/model/districtModel.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';
 import 'package:myapp/features/registration/repository/registrationRepository.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
