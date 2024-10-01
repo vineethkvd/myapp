@@ -52,6 +52,41 @@ class NetworkApiServices extends BaseApiServices {
     return responseJson;
   }
 
+   @override
+  Future<dynamic> postMultipartApi(
+      String url, Map<String, String> fields, List<http.MultipartFile> files) async {
+    if (kDebugMode) {
+      print(url);
+    }
+
+    dynamic responseJson;
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+      fields.forEach((key, value) {
+        request.fields[key] = value;
+      });
+      request.files.addAll(files);
+
+      var response = await request.send().timeout(const Duration(seconds: 10));
+
+      var responseData = await response.stream.toBytes();
+      var responseString = String.fromCharCodes(responseData);
+      responseJson = jsonDecode(responseString);
+
+      if (response.statusCode == 200) {
+        return responseJson;
+      } else {
+        throw FetchDataException(
+            'Error occured while communicating with server ${response.statusCode}');
+      }
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOut {
+      throw RequestTimeOut('');
+    }
+    return responseJson;
+  }
+
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:

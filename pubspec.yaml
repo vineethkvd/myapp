@@ -44,6 +44,8 @@ dependencies:
   fluttertoast: ^8.2.8
   shared_preferences: ^2.3.2
   menu_bar: ^0.5.3
+  image_picker: ^1.1.2
+  permission_handler: ^11.3.1
 
 
 dev_dependencies:

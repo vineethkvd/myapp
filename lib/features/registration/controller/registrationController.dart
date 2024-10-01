@@ -3,6 +3,9 @@ import 'package:myapp/features/registration/model/districtModel.dart';
 import 'package:myapp/features/registration/model/stateModel.dart';
 import 'package:myapp/features/registration/repository/registrationRepository.dart';
 import 'package:myapp/core/utils/shared/component/widgets/customToast.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class RegistrationController extends ChangeNotifier {
   final _api = RegistrationRepository();
@@ -80,4 +83,33 @@ class RegistrationController extends ChangeNotifier {
     );
     notifyListeners();
   }
+  XFile? image;
+  Future<void> uploadImage() async {
+    try {
+    if (!kIsWeb) {
+      var status = await Permission.storage.status;
+      if (!status.isGranted) {
+        await Permission.storage.request();
+      }
+
+      if (await Permission.storage.request().isGranted) {
+        final ImagePicker picker = ImagePicker();
+        final XFile? image =
+            await picker.pickImage(source: ImageSource.gallery);
+        if (image != null) {
+          this.image = image;
+          notifyListeners();
+        }
+      } else {
+        CustomToast.showCustomToast(message: 'Permission denied');
+      }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error uploading image: $e');
+      }
+      CustomToast.showCustomToast(message: 'Error uploading image');
+    }
+  }
+
 }
