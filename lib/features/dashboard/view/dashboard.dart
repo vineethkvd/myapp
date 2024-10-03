@@ -218,7 +218,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         return InkWell(
                                           onTap: () {  
                                             dashboardcontroller
-                                                .changeCurrentWidget(index);
+                                                .changeCurrentWidget(index,context);
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,

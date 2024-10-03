@@ -24,16 +24,18 @@ class AppRoutes {
               name: RoutesName.dashboard,
               path: RoutesPath.dashBoardPage,
               builder: (context, state) => const DashboardPage(),
-            ),
-            GoRoute(
-              name: RoutesName.ahVerfication,
-              path: RoutesPath.ahVerification,
-              builder: (context, state) => const AhVerificationPage(),
-            ),
-            GoRoute(
-              name: RoutesName.bhVerfication,
-              path: RoutesPath.bhVerification,
-              builder: (context, state) => const BhVerificationPage(),
+              routes: [
+                GoRoute(
+                  name: RoutesName.ahVerfication,
+                  path: RoutesPath.ahVerification, // Keep this path
+                  builder: (context, state) => const AhVerificationPage(),
+                ),
+                GoRoute(
+                  name: RoutesName.bhVerfication,
+                  path: RoutesPath.bhVerification, // Keep this path
+                  builder: (context, state) => const BhVerificationPage(),
+                ),
+              ],
             ),
             GoRoute(
               name: RoutesName.registration,

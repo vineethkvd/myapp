@@ -5,7 +5,6 @@ import 'package:myapp/features/registration/controller/registrationController.da
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:menu_bar/menu_bar.dart';
-import 'package:flutter_svg/svg.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
