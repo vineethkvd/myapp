@@ -4,7 +4,7 @@ import 'package:myapp/core/helpers/routes/app_route_name.dart';
 import 'package:myapp/features/dashboard/view/ahVerification.dart';
 import 'package:myapp/features/dashboard/view/bhVerfication.dart';
 
-class Dashboardcontroller extends ChangeNotifier {
+class DashboardController extends ChangeNotifier {
   int selectedIndex = 0;
   Widget currentWidget = const AhVerificationPage();
 

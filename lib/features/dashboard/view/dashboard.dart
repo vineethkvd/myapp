@@ -36,7 +36,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
-    final dashboardcontroller = Provider.of<Dashboardcontroller>(context);
+    final dashboardcontroller = Provider.of<DashboardController>(context);
     return Scaffold(
         body: Container(
       height: h,
@@ -216,9 +216,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                   child: ListView.separated(
                                       itemBuilder: (context, index) {
                                         return InkWell(
-                                          onTap: () {  
+                                          onTap: () {
                                             dashboardcontroller
-                                                .changeCurrentWidget(index,context);
+                                                .changeCurrentWidget(
+                                                    index, context);
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,

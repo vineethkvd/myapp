@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => Dashboardcontroller(),
+          create: (context) => DashboardController(),
         ),
         ChangeNotifierProvider(
           create: (context) => LoginController(),
