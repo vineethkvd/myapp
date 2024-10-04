@@ -31,7 +31,7 @@ class LoginController extends ChangeNotifier {
 
       if (response != null && response['status'] == 200) {
         loginModel = LoginModel.fromJson(response['data']);
-        context.go(RoutesPath.dashBoardPage);
+        context.go(RoutesPath.ahVerification);
         CustomToast.showCustomToast(message: "Login successful");
         notifyListeners();
       } else if (response != null && response['status'] == 400) {

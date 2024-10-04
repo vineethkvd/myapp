@@ -6,7 +6,7 @@ import 'package:myapp/features/dashboard/view/bhVerfication.dart';
 
 class DashboardController extends ChangeNotifier {
   int selectedIndex = 0;
-  Widget currentWidget = const AhVerificationPage();
+  Widget currentWidget = const BhVerificationPage();
 
   void changeCurrentWidget(int index, BuildContext context) {
     if (index == selectedIndex) return;
@@ -14,12 +14,12 @@ class DashboardController extends ChangeNotifier {
 
     switch (selectedIndex) {
       case 0:
-        currentWidget = const AhVerificationPage();
-        GoRouter.of(context).goNamed(RoutesName.ahVerfication);
+        currentWidget = const BhVerificationPage();
+        // GoRouter.of(context).goNamed(RoutesName.ahVerfication);
         break;
       case 1:
-        currentWidget = const BhVerificationPage();
-        GoRouter.of(context).goNamed(RoutesName.ahVerfication);
+        currentWidget = const AhVerificationPage();
+        // GoRouter.of(context).goNamed(RoutesName.ahVerfication);
         break;
       default:
         currentWidget = const Center(

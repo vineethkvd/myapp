@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:marquee_text/marquee_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,7 +8,8 @@ import 'package:myapp/features/dashboard/controller/dashboardController.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+  final Widget child;
+  const DashboardPage({super.key, required this.child});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -217,9 +219,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            dashboardcontroller
-                                                .changeCurrentWidget(
-                                                    index, context);
+                                            // dashboardcontroller
+                                            //     .changeCurrentWidget(
+                                            //         index, context);
+
+                                            if (index == 0) {
+                                              GoRouter.of(context)
+                                                  .goNamed('ahVerfication');
+                                            } else if (index == 1) {
+                                              GoRouter.of(context)
+                                                  .goNamed('bhVerfication');
+                                            }
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
@@ -269,7 +279,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           color: AppColor.conColor,
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: dashboardcontroller.currentWidget,
+                        child: widget.child,
                       ),
                     )
                   ],

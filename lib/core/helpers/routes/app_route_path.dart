@@ -1,8 +1,8 @@
 class RoutesPath {
-  static const dashBoardPage = '/dashBoardHome';
-  static const loginPage = '/login';
-  static const register = '/register';
-  static const ahVerification = 'ahVerification';
-  static const bhVerification = 'bhVerification';
-  static const resDashboard = '/resDashboard';
+  static const String loginPage = '/';
+  static const String dashBoardPage = '/dashboard';
+  static const String ahVerification = '/dashboard/ah-verification';
+  static const String bhVerification = '/dashboard/bh-verification';
+  static const String resDashboard = '/dashboard/res-dashboard';
+  static const String register = '/register';
 }
